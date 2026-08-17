@@ -1,8 +1,8 @@
 {
-  "id": "/only-eyes/",
+  "id": "/only-eyes/app",
   "name": "Only Eyes",
   "short_name": "Only Eyes",
-  "description": "Only Eyes avec suivi des yeux, transformation vocale, enregistrement audio+vidéo et effets visuels.",
+  "description": "Only Eyes avec suivi des yeux, transformation vocale, enregistrement audio et vidéo et effets visuels.",
   "lang": "fr-FR",
   "dir": "ltr",
   "start_url": "/only-eyes/",
