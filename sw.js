@@ -1,4 +1,4 @@
-const CACHE='only-eyes-v285';
+const CACHE='only-eyes-v286-install';
 const APP_SCOPE='/only-eyes/';
 const CORE=[
   APP_SCOPE,
