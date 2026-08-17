@@ -1,4 +1,4 @@
-const CACHE='only-eyes-v283';
+const CACHE='only-eyes-v284';
 const APP_SCOPE='/only-eyes/';
 const CORE=[
   APP_SCOPE,
@@ -11,11 +11,12 @@ const CORE=[
 self.addEventListener('install',event=>{
   event.waitUntil((async()=>{
     const cache=await caches.open(CACHE);
-    await Promise.allSettled(CORE.map(async url=>{
-      const request=new Request(url,{cache:'reload'});
-      const response=await fetch(request);
-      if(response.ok) await cache.put(request,response.clone());
-    }));
+    for(const url of CORE){
+      try{
+        const response=await fetch(new Request(url,{cache:'reload'}));
+        if(response.ok) await cache.put(url,response.clone());
+      }catch{}
+    }
     await self.skipWaiting();
   })());
 });
@@ -42,12 +43,12 @@ self.addEventListener('fetch',event=>{
   if(event.request.mode==='navigate'){
     event.respondWith((async()=>{
       try{
-        const fresh=await fetch(event.request,{cache:'no-store'});
-        if(fresh.ok){
+        const response=await fetch(event.request,{cache:'no-store'});
+        if(response.ok){
           const cache=await caches.open(CACHE);
-          await cache.put(APP_SCOPE+'index.html',fresh.clone());
+          await cache.put(APP_SCOPE+'index.html',response.clone());
         }
-        return fresh;
+        return response;
       }catch{
         return (await caches.match(APP_SCOPE+'index.html')) || (await caches.match(APP_SCOPE));
       }
@@ -57,16 +58,14 @@ self.addEventListener('fetch',event=>{
 
   event.respondWith((async()=>{
     try{
-      const fresh=await fetch(event.request,{cache:'no-store'});
-      if(fresh.ok){
+      const response=await fetch(event.request,{cache:'no-store'});
+      if(response.ok){
         const cache=await caches.open(CACHE);
-        await cache.put(event.request,fresh.clone());
+        await cache.put(event.request,response.clone());
       }
-      return fresh;
+      return response;
     }catch{
-      const cached=await caches.match(event.request);
-      if(cached) return cached;
-      throw new Error('offline');
+      return (await caches.match(event.request)) || Response.error();
     }
   })());
 });
