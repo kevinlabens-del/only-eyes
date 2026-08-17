@@ -1,0 +1,25 @@
+{
+  "name": "Only Eyes V2.8",
+  "short_name": "News Only eyes",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#050505",
+  "orientation": "portrait",
+  "description": "Only Eyes avec suivi des deux yeux, micro Web Audio, transformation vocale, enregistrement audio+vidéo, glitch RGB renforcé, mode couleur/N&B et bandes rouge/bleu dynamiques.",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
