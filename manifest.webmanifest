@@ -1,5 +1,5 @@
 {
-  "id": "/only-eyes/app",
+  "id": "/only-eyes/",
   "name": "Only Eyes",
   "short_name": "Only Eyes",
   "description": "Only Eyes avec suivi des yeux, transformation vocale, enregistrement audio et vidéo et effets visuels.",
@@ -18,13 +18,19 @@
       "src": "/only-eyes/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/only-eyes/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/only-eyes/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
