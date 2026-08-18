@@ -1,4 +1,4 @@
-const CACHE_NAME = 'only-eyes-pwa-v2';
+const CACHE_NAME = 'only-eyes-pwa-v3';
 const APP_SCOPE = '/only-eyes/';
 const APP_SHELL = [
   APP_SCOPE,
@@ -11,7 +11,7 @@ const APP_SHELL = [
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    await cache.addAll(APP_SHELL);
+    await Promise.allSettled(APP_SHELL.map(asset => cache.add(asset)));
     await self.skipWaiting();
   })());
 });
@@ -39,14 +39,14 @@ self.addEventListener('fetch', event => {
   if (request.mode === 'navigate') {
     event.respondWith((async () => {
       try {
-        const response = await fetch(request);
+        const response = await fetch(request, { cache: 'no-store' });
         if (response && response.ok) {
           const cache = await caches.open(CACHE_NAME);
           cache.put(APP_SCOPE + 'index.html', response.clone()).catch(() => {});
         }
         return response;
       } catch {
-        return (await caches.match(APP_SCOPE + 'index.html')) || (await caches.match(APP_SCOPE));
+        return (await caches.match(APP_SCOPE + 'index.html')) || (await caches.match(APP_SCOPE)) || new Response('Only Eyes indisponible hors ligne.', { status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
       }
     })());
     return;
