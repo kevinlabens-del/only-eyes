@@ -8,6 +8,12 @@ on:
       - 'android/**'
       - '.github/workflows/build-android-apk.yml'
       - 'icons/icon-512.png'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'android/**'
+      - '.github/workflows/build-android-apk.yml'
+      - 'icons/icon-512.png'
 
 permissions:
   contents: read
